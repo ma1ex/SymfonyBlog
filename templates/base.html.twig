@@ -6,7 +6,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {{ body['message'] }} <br>
+            {{ body['path'] }} <br>
+            {{ body['echo'] }}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
