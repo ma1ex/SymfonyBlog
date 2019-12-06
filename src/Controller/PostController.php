@@ -23,10 +23,25 @@ class PostController extends AbstractController {
             'echo' => 'Вот такое вот сообщение :)',
         ];
 
-        ddx($message);
+        $posts = [
+            'post1' => [
+                'title' => '1 Заголовок',
+                'body' => 'Тело первого поста'
+            ],
+            'post2' => [
+                'title' => '2 Заголовок',
+                'body' => 'Тело второго поста'
+            ],
+            'post3' => [
+                'title' => '3 Заголовок',
+                'body' => 'Тело третьего поста'
+            ],
+        ];
 
-        return $this->render('base.html.twig', [
-            'body' => $message,
+        //ddx($message);
+
+        return $this->render('post/index.html.twig', [
+            'posts' => $posts,
         ]);
     }
 }
