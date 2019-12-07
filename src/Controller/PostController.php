@@ -2,41 +2,73 @@
 
 namespace App\Controller;
 
+//use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Post;
 
 class PostController extends AbstractController {
+
+    /**
+     * @var
+     */
+    //public $fakePost;
 
     /**
      * @Route("/post", name="post")
      */
     public function index() {
-        /*return $this->json([
+
+        /* // API response
+         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/PostController.php',
             'echo' => 'Вот такое вот сообщение :)',
         ]);*/
 
-        $message = [
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/PostController.php',
-            'echo' => 'Вот такое вот сообщение :)',
-        ];
+        /* // Generate fake data
+         $this->fakePost = Factory::create();
 
-        $posts = [
+        $manager = $this->getDoctrine()->getManager();
+        for ($i = 1; $i < 20; $i++) {
+            $post = new Post();
+            $post->setTitle($this->fakePost->text(100));
+            $post->setBody($this->fakePost->text(500));
+            $post->setLikes(rand(100, 500));
+            $manager->persist($post);
+        }
+
+        $manager->flush();*/
+
+        /* // Demo array posts
+         $posts = [
             'post1' => [
-                'title' => '1 Заголовок',
-                'body' => 'Тело первого поста'
+                'title' => 'Заголовок 1',
+                'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing 
+                            elit. Ab amet aspernatur at beatae deleniti distinctio 
+                            esse, est illum impedit magnam natus praesentium qui 
+                            quia quis rem repudiandae veritatis vitae voluptas?'
             ],
             'post2' => [
-                'title' => '2 Заголовок',
-                'body' => 'Тело второго поста'
+                'title' => 'Заголовок 2',
+                'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing 
+                            elit. Ab amet aspernatur at beatae deleniti distinctio 
+                            esse, est illum impedit magnam natus praesentium qui 
+                            quia quis rem repudiandae veritatis vitae voluptas?'
             ],
             'post3' => [
-                'title' => '3 Заголовок',
-                'body' => 'Тело третьего поста'
+                'title' => 'Заголовок 3',
+                'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing 
+                            elit. Ab amet aspernatur at beatae deleniti distinctio 
+                            esse, est illum impedit magnam natus praesentium qui 
+                            quia quis rem repudiandae veritatis vitae voluptas?'
             ],
-        ];
+        ];*/
+
+        // Get Post entity from the repository
+        $repository = $this->getDoctrine()->getRepository(Post::class);
+        // Get all records
+        $posts = $repository->findAll();
 
         //ddx($message);
 

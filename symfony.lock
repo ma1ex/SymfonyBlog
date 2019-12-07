@@ -75,6 +75,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -217,7 +220,13 @@
     "symfony/orm-pack": {
         "version": "v1.0.7"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.13.1"
+    },
     "symfony/polyfill-intl-idn": {
+        "version": "v1.13.1"
+    },
+    "symfony/polyfill-intl-normalizer": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-mbstring": {
@@ -244,6 +253,9 @@
         "version": "v2.0.1"
     },
     "symfony/stopwatch": {
+        "version": "v5.0.1"
+    },
+    "symfony/string": {
         "version": "v5.0.1"
     },
     "symfony/translation-contracts": {
@@ -279,6 +291,9 @@
         "version": "v5.0.1"
     },
     "twig/extra-bundle": {
+        "version": "v3.0.0"
+    },
+    "twig/string-extra": {
         "version": "v3.0.0"
     },
     "twig/twig": {
