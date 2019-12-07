@@ -15,7 +15,8 @@ class PostController extends AbstractController {
     //public $fakePost;
 
     /**
-     * @Route("/post", name="post")
+     * Show all posts
+     * @Route("/post", name="posts")
      */
     public function index() {
 
@@ -74,6 +75,18 @@ class PostController extends AbstractController {
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
+        ]);
+    }
+
+    /**
+     * Show one post by id
+     * @param Post $post
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/post/{id}", name="post")
+     */
+    public function post(Post $post) {
+        return $this->render('post/show.html.twig', [
+            'post' => $post
         ]);
     }
 }

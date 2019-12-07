@@ -28,6 +28,9 @@
     </div>
     <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
+            <a href="{{ path('index') }}" class="navbar-brand d-flex align-items-center">
+                <strong>Home</strong>
+            </a>
             <a href="#" class="navbar-brand d-flex align-items-center">
                 <strong>Login at User</strong>
             </a>
@@ -41,7 +44,7 @@
 <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Posts page</h1>
+            <h1 class="jumbotron-heading">{% block caption %}{% endblock %}</h1>
         </div>
     </section>
 
