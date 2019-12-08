@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 //use Faker\Factory;
+use App\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Post;
 
@@ -16,7 +18,7 @@ class PostController extends AbstractController {
 
     /**
      * Show all posts
-     * @Route("/post", name="posts")
+     * @Route("/", name="index")
      */
     public function index() {
 
@@ -66,12 +68,18 @@ class PostController extends AbstractController {
             ],
         ];*/
 
+        return $this->render('home.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route ("/posts", name="posts")
+     */
+    public function showAllPosts() {
         // Get Post entity from the repository
         $repository = $this->getDoctrine()->getRepository(Post::class);
         // Get all records
         $posts = $repository->findAll();
-
-        //ddx($message);
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
@@ -79,14 +87,62 @@ class PostController extends AbstractController {
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @Route ("/api/posts", name="api_posts", methods={"GET","HEAD"})
+     */
+    public function ApiShowAllPosts() {
+        // Get Post entity from the repository
+        $repository = $this->getDoctrine()->getRepository(Post::class);
+        // Get all records | $posts[0]->getId()
+        $posts = $repository->findAll();
+
+        $arrPosts = [];
+        foreach($posts as $key => $post) {
+            $arrPosts[$key] = [
+                'id' => $post->getId(),
+                'title' => $post->getTitle(),
+                'body' => $post->getBody(),
+                'likes' => $post->getLikes()
+            ];
+        };
+
+        return $this->json($arrPosts);
+    }
+
+    /**
      * Show one post by id
      * @param Post $post
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/post/{id}", name="post")
+     * @Route("/post/{id}", name="post", requirements={"id"="\d+"})
      */
     public function post(Post $post) {
         return $this->render('post/show.html.twig', [
             'post' => $post
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Route ("/post/create", name="create_post")
+     */
+    public function createPost(Request $request) {
+        //
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirect('/');
+        }
+
+        return $this->render('post/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+
     }
 }

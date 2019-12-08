@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}All posts{% endblock %}
+{% block caption %}All posts{% endblock %}
+{% block body %}
+    {{ form_start(form) }}
+
+    {{ form_row(form.title, { 'attr': {
+        'cols' : '50',
+        'class' : 'form-control',
+        'placeholder' : 'Title' }})
+    }}
+
+    {{ form_row(form.body, { 'attr': {
+        'rows' : '10',
+        'class' : 'form-control',
+        'placeholder' : 'Description',
+        'cols' : '50' }})
+    }}
+
+    {{ form_row(form.likes, { 'attr': {
+        'class' : 'form-control',
+        'disabled' : 'disabled',
+        'value' : '0',
+        'cols' : '50'}})
+    }}
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -2,6 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-index:
-    path: /
-    controller: App\Controller\PostController::index
+#index:
+#    path: /
+#    controller: App\Controller\PostController::index
+
+#post_create:
+#    path: /postt/create
+#    controller: App\Controller\PostController::createPost
