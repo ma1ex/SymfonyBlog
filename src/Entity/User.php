@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity(fields="email", message="Email already taken")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
@@ -20,6 +23,9 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3)
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid.")
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -29,7 +35,11 @@ class User implements UserInterface
      */
     private $password;
 
-    // Temp password
+    /**
+     * Temp password
+     * @Assert\NotBlank()
+     * @Assert\Length(min=6)
+     */
     private $plainPassword;
 
     /**
