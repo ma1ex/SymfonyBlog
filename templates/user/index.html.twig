@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All users{% endblock %}
+{% block caption %}All users{% endblock %}
+{% block body %}
+    {% for user in users %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <p class="card-text">id: <b>{{ user.id }}</b></p>
+                    <p class="card-text">Email: <b>{{ user.email }}</b></p>
+                    <p class="card-text">Role: <b>{{ user.roles[0] }}</b></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
